@@ -3,6 +3,8 @@ import os
 import shutil
 import re
 
+
+# Use for two level folder
 folder_path = r"D:\Study\Project\Data\copy\file"
 root = r"D:\Study\Project\Data\copy"
 channel_set = set()
