@@ -2,7 +2,7 @@ import math
 import os
 import shutil
 import re
-
+#test
 folder_path = r"D:\Study\Project\Data\copy\file"
 root = r"D:\Study\Project\Data\copy"
 channel_set = set()
