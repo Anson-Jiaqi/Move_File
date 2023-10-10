@@ -4,7 +4,7 @@ import shutil
 import re
 
 
-# Use for two level folder
+# Use for two level folder test
 folder_path = r"D:\Study\Project\Data\copy\file"
 root = r"D:\Study\Project\Data\copy"
 channel_set = set()
