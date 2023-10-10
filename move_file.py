@@ -6,7 +6,7 @@ import re
 folder_path = r"D:\Study\Project\Data\copy\file"
 root = r"D:\Study\Project\Data\copy"
 channel_set = set()
-
+#test2
 X = 4
 Y = 2
 layer = 0
