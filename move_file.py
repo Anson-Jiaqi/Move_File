@@ -17,7 +17,7 @@ channel_names = ""
 
 p = os.listdir(folder_path)
 
-print("test")
+print("1")
 i = 0
 for x in range(X):
     for y in range(Y):
