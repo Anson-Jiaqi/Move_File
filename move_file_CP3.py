@@ -182,8 +182,8 @@ for channel_name in channel_set:
                     path3 = os.path.join(path2,second_level)
                     target = os.path.join(path3,new_filename)
                     old_filepath = os.path.join(folder_path, filename)
-                    if os.path.exists(old_filepath):
-                        shutil.move(old_filepath, target)
+                    # if os.path.exists(old_filepath):
+                    #     shutil.move(old_filepath, target)
 
 
 
