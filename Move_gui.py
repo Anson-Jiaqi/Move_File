@@ -22,7 +22,7 @@ def findF(p):
         if matches:
             keys = {}
             for match in matches:
-                key = match[0][0].upper() + match[0][1:]  # 将关键字的首字母转换为大写
+                key = match[0][0].upper() + match[0][1:]
 
                 if key == "C":
                     value = match[1:]
@@ -166,7 +166,7 @@ def addChannel(p):
         if matches:
             keys = {}
             for match in matches:
-                key = match[0][0].upper() + match[0][1:]  # 将关键字的首字母转换为大写
+                key = match[0][0].upper() + match[0][1:]
 
                 if key == "C":
                     value = match[1:]
@@ -234,7 +234,7 @@ def movefile(target, p, matrix, order):
                         keys = {}
                         for match in matches:
 
-                            key = match[0][0].upper() + match[0][1:]  # 将关键字的首字母转换为大写
+                            key = match[0][0].upper() + match[0][1:]
                             if key == "C":
                                 value = match[1:]
                                 value = int(value)
