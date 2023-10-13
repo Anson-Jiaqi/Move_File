@@ -1,4 +1,3 @@
-import math
 import os
 import shutil
 import re
@@ -12,6 +11,7 @@ channel_set = set()
 F_set = set()
 matrix = [[1 for _ in range(X)] for _ in range(Y)]
 order = [[1 for _ in range(X)] for _ in range(Y)]
+
 
 def findF(p):
     for filename in p:
@@ -85,12 +85,12 @@ def orders(type, sorted_F_set):
             for y in range(Y):
                 for x in range(X):
                     y1 = Y - y - 1
-                    if (y+1) % 2 == 1:# if odd row
+                    if (y + 1) % 2 == 1:  # if odd row
                         x1 = X - x - 1
                         matrix[y1][x1] = sorted_F_set[i]
                         order[y1][x1] = i
                         i = i + 1
-                    elif(y+1) % 2 == 0:# if even row
+                    elif (y + 1) % 2 == 0:  # if even row
                         matrix[y1][x] = sorted_F_set[i]
                         order[y1][x] = i
                         i = i + 1
@@ -99,12 +99,12 @@ def orders(type, sorted_F_set):
             i = 0
             for y in range(Y):
                 for x in range(X):
-                    if (y+1) % 2 == 1:# if odd row
+                    if (y + 1) % 2 == 1:  # if odd row
                         x1 = X - x - 1
                         matrix[y][x1] = sorted_F_set[i]
                         order[y][x1] = i
                         i = i + 1
-                    elif(y+1) % 2 == 0:# if even row
+                    elif (y + 1) % 2 == 0:  # if even row
                         matrix[y][x] = sorted_F_set[i]
                         order[y][x] = i
                         i = i + 1
@@ -114,12 +114,12 @@ def orders(type, sorted_F_set):
             for y in range(Y):
                 for x in range(X):
                     y1 = Y - y - 1
-                    if (y+1) % 2 == 1:# if odd row
+                    if (y + 1) % 2 == 1:  # if odd row
 
                         matrix[y1][x] = sorted_F_set[i]
                         order[y1][x] = i
                         i = i + 1
-                    elif(y+1) % 2 == 0:# if even row
+                    elif (y + 1) % 2 == 0:  # if even row
                         x1 = X - x - 1
                         matrix[y1][x1] = sorted_F_set[i]
                         order[y1][x1] = i
@@ -146,20 +146,15 @@ def orders(type, sorted_F_set):
             i = 0
             for y in range(Y):
                 for x in range(X):
-                    if (y+1) % 2 == 1:# if odd row
+                    if (y + 1) % 2 == 1:  # if odd row
                         matrix[y][x] = sorted_F_set[i]
                         order[y][x] = i
                         i = i + 1
-                    elif(y+1) % 2 == 0:# if even row
+                    elif (y + 1) % 2 == 0:  # if even row
                         x1 = X - x - 1
                         matrix[y][x1] = sorted_F_set[i]
                         order[y][x1] = i
                         i = i + 1
-
-
-
-
-
 
 
 ##############################
@@ -200,6 +195,7 @@ def addChannel(p):
         if not os.path.exists(channel_path):
             os.makedirs(channel_path)
 
+
 ################################
 def create_folder():
     for channel_name in channel_set:
@@ -217,7 +213,9 @@ def create_folder():
                 second_path = os.path.join(first_path, second_level)
                 if not os.path.exists(second_path):
                     os.makedirs(second_path)
-def movefile(target,p):
+
+
+def movefile(target, p):
     print(target)
     for channel_name in channel_set:
         channel_path = os.path.join(target, channel_name)
@@ -268,25 +266,31 @@ def movefile(target,p):
                         if os.path.exists(old_filepath):
                             shutil.move(old_filepath, targetpath)
 
+
 ##############################################
 # main #
 ##############################################
 
 if __name__ == '__main__':
-    folder_path = r"D:\Study\Project\Data\DF\file"
-    target = r"D:\Study\Project\Data\DF\target2"
-    types = 8
-    X = 2
-    Y = 2
+    # folder_path = r"D:\Study\Project\Data\DF\file"
+    # target = r"D:\Study\Project\Data\DF\target2"
+    # types = 8
+    # X = 2
+    # Y = 2
+    folder_path = input("Folder path: ")
+    target = input("Target folder: ")
+    types = input("Arrangement type: ")
+    X = input("X: ")
+    Y = input("Y: ")
     matrix = [[1 for _ in range(X)] for _ in range(Y)]
     order = [[1 for _ in range(X)] for _ in range(Y)]
     layer = 0
     p = os.listdir(folder_path)
     sorted_F_set = findF(p)
     print(sorted_F_set)
-    orders(types,sorted_F_set)
+    orders(types, sorted_F_set)
     print(order)
     print(matrix)
     addChannel(p)
     create_folder()
-    movefile(target,p)
+    movefile(target, p)
