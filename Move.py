@@ -46,26 +46,121 @@ def findF(p):
 
 
 def orders(type, sorted_F_set):
-    i = 0
-    for x in range(X):
-        if (x + 1) % 2 == 0:  # even
+    match type:
+        case 1:
+            #####  type 1  #####
+            i = 0
+            for x in range(X):
+                if (x + 1) % 2 == 0:  # even
+                    for y in range(Y):
+                        matrix[y][x] = sorted_F_set[i]
+                        order[y][x] = i
+                        i = i + 1
+                elif (x + 1) % 2 == 1:  # odd
+                    for y in range(Y):
+                        y1 = Y - y - 1
+                        matrix[y1][x] = sorted_F_set[i]
+                        order[y1][x] = i
+                        i = i + 1
+        case 2:
+            #####  type 2  #####
+            i = 0
+            for x in range(X):
+                if (x + 1) % 2 == 1:  # odd
+                    for y in range(Y):
+                        matrix[y][x] = sorted_F_set[i]
+                        order[y][x] = i
+                        i = i + 1
+                        print(i)
+                elif (x + 1) % 2 == 0:  # even
+                    for y in range(Y):
+                        y1 = Y - y - 1
+                        matrix[y1][x] = sorted_F_set[i]
+                        order[y1][x] = i
+                        i = i + 1
+                        print(i)
+        case 3:
+            #####  type 3  #####
+            i = 0
             for y in range(Y):
-                matrix[y][x] = sorted_F_set[i]
-                order[y][x] = i
-                i = i + 1
-        elif (x + 1) % 2 == 1:  # odd
+                for x in range(X):
+                    y1 = Y - y - 1
+                    if (y+1) % 2 == 1:# if odd row
+                        x1 = X - x - 1
+                        matrix[y1][x1] = sorted_F_set[i]
+                        order[y1][x1] = i
+                        i = i + 1
+                    elif(y+1) % 2 == 0:# if even row
+                        matrix[y1][x] = sorted_F_set[i]
+                        order[y1][x] = i
+                        i = i + 1
+        case 4:
+            #####  type 4  #####
+            i = 0
             for y in range(Y):
-                y1 = Y - y - 1
-                matrix[y1][x] = sorted_F_set[i]
-                order[y1][x] = i
-                i = i + 1
+                for x in range(X):
+                    if (y+1) % 2 == 1:# if odd row
+                        x1 = X - x - 1
+                        matrix[y][x1] = sorted_F_set[i]
+                        order[y][x1] = i
+                        i = i + 1
+                    elif(y+1) % 2 == 0:# if even row
+                        matrix[y][x] = sorted_F_set[i]
+                        order[y][x] = i
+                        i = i + 1
+        case 5:
+            #####  type 5  #####
+            i = 0
+            for y in range(Y):
+                for x in range(X):
+                    y1 = Y - y - 1
+                    if (y+1) % 2 == 1:# if odd row
+
+                        matrix[y1][x] = sorted_F_set[i]
+                        order[y1][x] = i
+                        i = i + 1
+                    elif(y+1) % 2 == 0:# if even row
+                        x1 = X - x - 1
+                        matrix[y1][x1] = sorted_F_set[i]
+                        order[y1][x1] = i
+                        i = i + 1
+        case 6:
+            #####  type 6  #####
+            i = 0
+            for x in range(X):
+                for y in range(Y):
+                    matrix[y][x] = sorted_F_set[i]
+                    order[y][x] = i
+                    i = i + 1
+
+        case 7:
+            #####  type 7  #####
+            i = 0
+            for y in range(Y):
+                for x in range(X):
+                    matrix[y][x] = sorted_F_set[i]
+                    order[y][x] = i
+                    i = i + 1
+        case 8:
+            #####  type 8  #####
+            i = 0
+            for y in range(Y):
+                for x in range(X):
+                    if (y+1) % 2 == 1:# if odd row
+                        matrix[y][x] = sorted_F_set[i]
+                        order[y][x] = i
+                        i = i + 1
+                    elif(y+1) % 2 == 0:# if even row
+                        x1 = X - x - 1
+                        matrix[y][x1] = sorted_F_set[i]
+                        order[y][x1] = i
+                        i = i + 1
 
 
-# for y in range(Y):
-#     first_level = f"{y :06d}"
-#     print(first_level)
-#     for x in range(X):
-#         matrix[x][y]
+
+
+
+
 
 ##############################
 def addChannel(p):
@@ -180,7 +275,7 @@ def movefile(target,p):
 if __name__ == '__main__':
     folder_path = r"D:\Study\Project\Data\DF\file"
     target = r"D:\Study\Project\Data\DF\target2"
-    type = "1"
+    types = 8
     X = 2
     Y = 2
     matrix = [[1 for _ in range(X)] for _ in range(Y)]
@@ -189,7 +284,9 @@ if __name__ == '__main__':
     p = os.listdir(folder_path)
     sorted_F_set = findF(p)
     print(sorted_F_set)
-    orders(type,sorted_F_set)
+    orders(types,sorted_F_set)
+    print(order)
+    print(matrix)
     addChannel(p)
     create_folder()
     movefile(target,p)
