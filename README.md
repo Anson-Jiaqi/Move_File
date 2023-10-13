@@ -11,6 +11,6 @@ F123 is the file order, any number follow "F"or"f".
 C123 is the channel, any number follow "C" or "c".
 Z123 is the Z layer, any number follow "Z" or "z".  
 Then you need to select the Arrangement type. 
-
+![image](https://github.com/Anson-Jiaqi/Image/blob/main/order_type.png)
 
 
