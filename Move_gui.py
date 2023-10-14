@@ -5,6 +5,7 @@ import re
 import tkinter as tk
 from tkinter import filedialog
 
+# pattern for the keywords in file name
 pattern = r'(?i)([Ff][0-9]+|[Tt][0-9]+|[Zz][0-9]+|[Cc][0-9]+)'
 
 folder_path = r""
@@ -13,6 +14,8 @@ channel_set = set()
 F_set = set()
 
 
+# This function is used to find the file number in the file name
+# Then sort the F number in ascending order and save it in the F set
 def findF(p):
     for filename in p:
         matches = re.findall(pattern, filename)
@@ -21,7 +24,7 @@ def findF(p):
         F = ""
         if matches:
             keys = {}
-            for match in matches:
+            for match in matches:  # check the keywords in the file name
                 key = match[0][0].upper() + match[0][1:]
 
                 if key == "C":
@@ -41,12 +44,13 @@ def findF(p):
                     value = int(value)
                     F = "F" + str(value)
             F_set.add(F)
-    sorted_F_set = sorted(F_set, key=lambda x: int(x[1:]))
+    sorted_F_set = sorted(F_set, key=lambda x: int(x[1:]))  # sort the F number
     return sorted_F_set
 
 
+# This function is used to set the order type of the File
 def orders(type, sorted_F_set, matrix, order, X, Y):
-    match type:
+    match type:  # There are totally 8 type in this function. Detail can check the image in README.md
         case 1:
             #####  type 1  #####
             i = 0
@@ -155,7 +159,7 @@ def orders(type, sorted_F_set, matrix, order, X, Y):
                         i = i + 1
 
 
-##############################
+# This function is used to create the channel folder
 def addChannel(p):
     for filename in p:
         # print(filename)
@@ -194,17 +198,17 @@ def addChannel(p):
             os.makedirs(channel_path)
 
 
-################################
+# Create the two-level hierarchy folder
 def create_folder():
     for channel_name in channel_set:
         channel_path = os.path.join(target, channel_name)
-        for y in range(Y):
+        for y in range(Y):  # Create the first level folder
             first_level = f"{y :06d}"
             first_path = os.path.join(channel_path, first_level)
             if not os.path.exists(first_path):
                 os.makedirs(first_path)
 
-            for x in range(X):
+            for x in range(X):  # Create the second level folder
                 name1 = f"{y :06d}"
                 name2 = f"{x :06d}"
                 second_level = name1 + "_" + name2
@@ -213,6 +217,7 @@ def create_folder():
                     os.makedirs(second_path)
 
 
+# Move the file to the target folder and rename each files according to the rules of Terastitcher
 def movefile(target, p, matrix, order):
     print(target)
     for channel_name in channel_set:
@@ -223,17 +228,14 @@ def movefile(target, p, matrix, order):
                 name1 = f"{y :06d}"
                 name2 = f"{x :06d}"
                 second_level = name1 + "_" + name2
-                pt = matrix[y][x]
-                print(pt)
+                pt = matrix[y][x]  # Get the file number in the current position
                 for filename in p:
                     matches = re.findall(pattern, filename)
                     channel_name = ""
                     Z = ""
                     F = ""
                     if matches:
-                        keys = {}
                         for match in matches:
-
                             key = match[0][0].upper() + match[0][1:]
                             if key == "C":
                                 value = match[1:]
@@ -251,9 +253,9 @@ def movefile(target, p, matrix, order):
                                 value = match[1:]
                                 value = int(value)
                                 F = "F" + str(value)
-                    if F == pt:
+                    if F == pt:  # Check if current file should in current position
                         num_str = Z[1:]
-                        num = int(num_str) * X * Y + order[y][x]
+                        num = int(num_str) * X * Y + order[y][x]  # Create the new file name according to the X, Y and Z
                         new_filename = f"{num :06d}" + ".tif"
                         path1 = os.path.join(target, channel_name)
                         path2 = os.path.join(path1, first_level)
@@ -310,8 +312,7 @@ if __name__ == '__main__':
         else:
             print("Please input the value")
 
-
-
+# create the GUI
     root = tk.Tk()
     root.title("Move File")
     root.geometry("400x400")
@@ -339,7 +340,6 @@ if __name__ == '__main__':
     types_entry = tk.Entry(root)
     types_entry.pack()
 
-
     run_button = tk.Button(root, text="Run", command=run_code)
     run_button.pack()
 
@@ -349,6 +349,5 @@ if __name__ == '__main__':
     types = None
     X = 0
     Y = 0
-
 
     root.mainloop()
