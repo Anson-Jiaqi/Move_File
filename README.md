@@ -11,6 +11,15 @@ F123 is the file order, "F" or "f" followed by any number.
 C123 is the channel, "C" or "c"followed by any number.  
 Z123 is the Z layer, "Z" or "z"followed by any number.  
 Then you need to select the Arrangement type. 
-![image](https://github.com/Anson-Jiaqi/Image/blob/main/order_type.png)
+![image](https://github.com/Anson-Jiaqi/Image/blob/main/order_type.png)    
+
+When using command line version, the input example is:  
+  
+*python Move.py path=D:\example\file target=D:\example\target types=1 x=1 y=1*  
+  
+"path" is the folder which contain all the image files.  
+"target" is the folder where you want to put your Two-level hierarchy folder.  
+"types" is the arrangement types.  
+"x" and "y" is the coordinates of your image set.
 
 

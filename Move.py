@@ -1,6 +1,7 @@
 import os
 import shutil
 import re
+import sys
 
 pattern = r'(?i)([Ff][0-9]+|[Tt][0-9]+|[Zz][0-9]+|[Cc][0-9]+)'
 X = 0
@@ -277,14 +278,31 @@ if __name__ == '__main__':
     # types = 8
     # X = 2
     # Y = 2
-    folder_path = input("Folder path: ")
-    target = input("Target folder: ")
-    types = input("Arrangement type: ")
-    X = input("X: ")
-    Y = input("Y: ")
+    args = sys.argv
+    types=0
+    for arg in args[1:]:
+        if arg.startswith("path="):
+            folder_path = arg[5:]
+        elif arg.startswith("target="):
+            target = arg[7:]
+        elif arg.startswith("types="):
+            types = int(arg[6:])
+        elif arg.startswith("x="):
+            X = int(arg[2:])
+        elif arg.startswith("y="):
+            Y = int(arg[2:])
+    # folder_path = input("Folder path: ")
+    # target = input("Target folder: ")
+    # types = input("Arrangement type: ")
+    # X = input("X: ")
+    # Y = input("Y: ")
     matrix = [[1 for _ in range(X)] for _ in range(Y)]
     order = [[1 for _ in range(X)] for _ in range(Y)]
-    layer = 0
+    print("path = " + folder_path)
+    print("target = " + target)
+    print("types = ", types)
+    print("X = ", X)
+    print("Y = ", Y)
     p = os.listdir(folder_path)
     sorted_F_set = findF(p)
     print(sorted_F_set)
