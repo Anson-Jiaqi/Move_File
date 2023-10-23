@@ -20,6 +20,6 @@ When using command line version, the input example is:
 "path" is the folder which contain all the image files.  
 "target" is the folder where you want to put your Two-level hierarchy folder.  
 "types" is the arrangement types.  
-"x" and "y" is the coordinates of your image set.
+"x" and "y" are the coordinates of your image set.
 
 
